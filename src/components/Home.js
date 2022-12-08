@@ -1,11 +1,12 @@
 import { Button } from '@mantine/core';
 import { Link } from "react-router-dom";
 
-export const SignIn = () => {
+export const Home = () => {
   return (
     <>
       <Button>Click me!</Button>
-      <Link to={`/`}>ホームに戻る</Link>
+      <Link to={`/signin`}>サインイン</Link>
+      <Link to={`/signup`}>サインアップ</Link>
     </>
   );
 }

@@ -1,9 +1,9 @@
 import './App.css';
-import { Button } from '@mantine/core';
+import { SignIn } from './components/SignIn';
 
 function App() {
   return (
-    <Button>Click me!</Button>
+    <SignIn />
   );
 }
 

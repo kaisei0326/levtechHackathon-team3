@@ -4,12 +4,23 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { MantineProvider } from '@mantine/core';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { SignIn } from './components/SignIn';
+import { SignUp } from './components/SignUp';
+import { Home } from './components/Home';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <MantineProvider withGlobalStyles withNormalizeCSS>
-      <App />
+    <BrowserRouter>
+      <Routes>
+        <Route path={`/`} element={<Home />} />
+        <Route path={`/signin`} element={<SignIn />} />
+        <Route path={`/signup`} element={<SignUp />} />
+        {/* <Route path={`/login/`} element={<Login />} /> */}
+      </Routes>
+    </BrowserRouter>
     </MantineProvider>
   </React.StrictMode>
 );
