@@ -8,14 +8,16 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { SignIn } from './components/SignIn';
 import { SignUp } from './components/SignUp';
 import { Home } from './components/Home';
-import { QueryClient, QueryClientProvider, useQuery } from 'react-query'
+import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
+import { CookiesProvider } from "react-cookie";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const queryClient = new QueryClient()
 root.render(
   <React.StrictMode>
-    <MantineProvider withGlobalStyles withNormalizeCSS>
-    <QueryClientProvider client={queryClient}>
+    <CookiesProvider>
+      <MantineProvider withGlobalStyles withNormalizeCSS>
+      <QueryClientProvider client={queryClient}>
         <BrowserRouter>
           <Routes>
             <Route path={`/`} element={<Home />} />
@@ -25,6 +27,7 @@ root.render(
         </BrowserRouter>
       </QueryClientProvider>
     </MantineProvider>
+    </CookiesProvider>
   </React.StrictMode>
 );
 

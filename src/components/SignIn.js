@@ -3,17 +3,36 @@ import { Button } from '@mantine/core';
 import { Link } from "react-router-dom";
 import { TextInput, Checkbox, Group, Box } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { useCookies } from 'react-cookie';
 import { useMutateLogin } from '../api/useMutateLogin';
 import { useQueryLogin } from '../api/useQueryLogin';
+import { useCookies } from "react-cookie";
 
 export const SignIn = () => {
+  // console.log(data);
+  //const { useLogin } = useMutateLogin();
+  // useLogin.mutate(formData);
+  
+  const { token, status } = useQueryLogin();
+  const form = useForm({
+    initialValues: {
+      token: 'test token',
+      username: '',
+      password:'',
+    },
+  });
+
+  const PHPSESSID = 'sada';
+  const [cookies, setCookie] = useCookies(["userdata"]);
+  function ID_setCookie(PHPSESSID) {
+    //ここにPHPSESSIDを持ってくる処理
+    setCookie("userdata", PHPSESSID)
+  }
 
   return (
     <Box sx={{ maxWidth: 300 }} mx="auto">
       <Link to={`/`}>ホームに戻る</Link>
     
-      <form onSubmit={form.onSubmit((values) => console.log(values))}>
+      <form onSubmit={form.onSubmit((values) => ID_setCookie(PHPSESSID))}>
         <TextInput
           withAsterisk
           label="username"
@@ -29,13 +48,10 @@ export const SignIn = () => {
 
         <Group position="right" mt="md">
           <Button type="submit"
-          onClick={takeToken}
           >Submit</Button>
         </Group>
 
       </form>
-    
-    {cookies.id}
     </Box>
   );
 }
