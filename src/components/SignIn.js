@@ -3,7 +3,6 @@ import { Button } from '@mantine/core';
 import { Link } from "react-router-dom";
 import { TextInput, Checkbox, Group, Box } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { useCookies } from "react-cookie";
 import { postData } from "../api/postData";
 import { getData } from "../api/getData";
 
@@ -19,15 +18,7 @@ export const SignIn = () => {
     },
   });
 
-  const PHPSESSID = 'sada';
-  const [cookies, setCookie] = useCookies(["userdata"]);
-
   async function postUserdata(values) {
-    //valuesをuseMUtateLoginに送る
-    //PHPSESSIDを受け取る
-    console.log(values)
-    setCookie("PHPSSID", PHPSESSID)
-    console.log(PHPSESSID)
     const tokenObj = await getData(url)
     values.csrftoken = tokenObj.csrftoken
 
