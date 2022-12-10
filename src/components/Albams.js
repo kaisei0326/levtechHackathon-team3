@@ -18,20 +18,20 @@ import {
   const mockdata = [
     {
       title: '夏合宿',
-      description:
-        "32枚の写真",
+      description: "32枚の写真",
       icon: IconGauge,
+      photo: "https://i2.wp.com/star-be.com/wp-content/uploads/2019/08/DSC_2269.jpg?fit=665%2C443&ssl=1",
     },
     {
       title: '夏休み',
       description:
-        'People say it can run at the same speed as lightning striking, Its icy body is so cold, it will not melt even if it is immersed in magma',
+        '60枚の写真',
       icon: IconUser,
     },
     {
       title: '昨年度のハイライト',
       description:
-        'They’re popular, but they’re rare. Trainers who show them off recklessly may be targeted by thieves',
+        '30枚の写真',
       icon: IconCookie,
     },
   ];
