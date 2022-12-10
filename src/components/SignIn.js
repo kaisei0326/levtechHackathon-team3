@@ -15,7 +15,7 @@ export const SignIn = () => {
   const { token, status } = useQueryLogin();
   const form = useForm({
     initialValues: {
-      token: 'test token',
+      csrftoken: token,
       username: '',
       password:'',
     },
@@ -23,16 +23,18 @@ export const SignIn = () => {
 
   const PHPSESSID = 'sada';
   const [cookies, setCookie] = useCookies(["userdata"]);
-  function ID_setCookie(PHPSESSID) {
+  if (status !== "success") {console.log(status)};
+  function ID_setCookie(values, PHPSESSID) {
     //ここにPHPSESSIDを持ってくる処理
     setCookie("userdata", PHPSESSID)
+    console.log(values)
   }
 
   return (
     <Box sx={{ maxWidth: 300 }} mx="auto">
       <Link to={`/`}>ホームに戻る</Link>
     
-      <form onSubmit={form.onSubmit((values) => ID_setCookie(PHPSESSID))}>
+      <form onSubmit={form.onSubmit((values) => ID_setCookie(values, PHPSESSID))}>
         <TextInput
           withAsterisk
           label="username"
