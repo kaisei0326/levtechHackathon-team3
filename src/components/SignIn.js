@@ -21,10 +21,13 @@ export const SignIn = () => {
 
   const PHPSESSID = 'sada';
   const [cookies, setCookie] = useCookies(["userdata"]);
-  async function ID_setCookie(values, PHPSESSID) {
-    //ここにPHPSESSIDを持ってくる処理
-    setCookie("userdata", PHPSESSID)
 
+  async function postUserdata(values) {
+    //valuesをuseMUtateLoginに送る
+    //PHPSESSIDを受け取る
+    console.log(values)
+    setCookie("PHPSSID", PHPSESSID)
+    console.log(PHPSESSID)
     const tokenObj = await getData(url)
     values.csrftoken = tokenObj.csrftoken
 
@@ -34,7 +37,8 @@ export const SignIn = () => {
   return (
     <Box sx={{ maxWidth: 300 }} mx="auto">
       <Link to={`/`}>ホームに戻る</Link>
-      <form onSubmit={form.onSubmit((values) => ID_setCookie(values, PHPSESSID))}>
+    
+      <form onSubmit={form.onSubmit((values) => postUserdata(values))}>
         <TextInput
           withAsterisk
           label="name"
@@ -49,10 +53,8 @@ export const SignIn = () => {
         />
 
         <Group position="right" mt="md">
-          <Button type="submit"
-          >Submit</Button>
+          <Button type="submit">Submit</Button>
         </Group>
-
       </form>
     </Box>
   );
