@@ -3,12 +3,13 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { MantineProvider } from '@mantine/core';
+import { Group, MantineProvider } from '@mantine/core';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { SignIn } from './components/SignIn';
 import { SignUp } from './components/SignUp';
 import { Home } from './components/Home';
 import { QueryClient, QueryClientProvider, useQuery } from 'react-query'
+import { Groups } from './components/Groups';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const queryClient = new QueryClient()
@@ -21,6 +22,7 @@ root.render(
             <Route path={`/`} element={<Home />} />
             <Route path={`/signin`} element={<SignIn />} />
             <Route path={`/signup`} element={<SignUp />} />
+            <Route path={`/groups`} element={<Groups />} />
           </Routes>
         </BrowserRouter>
       </QueryClientProvider>

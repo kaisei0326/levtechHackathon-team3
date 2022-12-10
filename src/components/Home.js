@@ -9,6 +9,7 @@ export const Home = () => {
       <Button>Click me!</Button>
       <Link to={`/signin`}>サインイン</Link>
       <Link to={`/signup`}>サインアップ</Link>
+      <Link to={`/groups`}>グループ一覧</Link>
     </>
   );
 }
