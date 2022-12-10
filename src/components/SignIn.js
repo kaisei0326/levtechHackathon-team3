@@ -4,15 +4,12 @@ import { Link } from "react-router-dom";
 import { TextInput, Checkbox, Group, Box } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useCookies } from "react-cookie";
-import axios from "axios";
+import { postData } from "../api/postData";
+import { getData } from "../api/getData";
 
 export const SignIn = () => {
   const url = 'https://tadanodomain.gq:9090/v1/login'
 
-  const token = async () => {
-    const { data } = await axios.get(url);
-    return data;
-  }
 
   const form = useForm({
     initialValues: {
@@ -21,7 +18,6 @@ export const SignIn = () => {
       password:'',
     },
   });
-  console.log(token.csrftoken)
 
   const PHPSESSID = 'sada';
   const [cookies, setCookie] = useCookies(["userdata"]);
@@ -29,20 +25,10 @@ export const SignIn = () => {
     //ここにPHPSESSIDを持ってくる処理
     setCookie("userdata", PHPSESSID)
 
-    const tokenObj = await token()
+    const tokenObj = await getData(url)
     values.csrftoken = tokenObj.csrftoken
 
-    axios.post(url, values, {
-      withCredentials: true,
-      headers : {
-        'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8'
-      }
-    }).then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+    postData(url, values);
   }
 
   return (
