@@ -8,19 +8,22 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { SignIn } from './components/SignIn';
 import { SignUp } from './components/SignUp';
 import { Home } from './components/Home';
+import { QueryClient, QueryClientProvider, useQuery } from 'react-query'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+const queryClient = new QueryClient()
 root.render(
   <React.StrictMode>
     <MantineProvider withGlobalStyles withNormalizeCSS>
-    <BrowserRouter>
-      <Routes>
-        <Route path={`/`} element={<Home />} />
-        <Route path={`/signin`} element={<SignIn />} />
-        <Route path={`/signup`} element={<SignUp />} />
-        {/* <Route path={`/login/`} element={<Login />} /> */}
-      </Routes>
-    </BrowserRouter>
+    <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <Routes>
+            <Route path={`/`} element={<Home />} />
+            <Route path={`/signin`} element={<SignIn />} />
+            <Route path={`/signup`} element={<SignUp />} />
+          </Routes>
+        </BrowserRouter>
+      </QueryClientProvider>
     </MantineProvider>
   </React.StrictMode>
 );
