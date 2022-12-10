@@ -12,10 +12,10 @@ export const SignIn = () => {
   //const { useLogin } = useMutateLogin();
   // useLogin.mutate(formData);
   
-  const { token, status } = useQueryLogin();
+  const { data, status } = useQueryLogin();
   const form = useForm({
     initialValues: {
-      csrftoken: token,
+      csrftoken: data,
       username: '',
       password:'',
     },
@@ -23,18 +23,20 @@ export const SignIn = () => {
 
   const PHPSESSID = 'sada';
   const [cookies, setCookie] = useCookies(["userdata"]);
-  if (status !== "success") {console.log(status)};
-  function ID_setCookie(values, PHPSESSID) {
-    //ここにPHPSESSIDを持ってくる処理
-    setCookie("userdata", PHPSESSID)
+
+  function postUserdata(values) {
+    //valuesをuseMUtateLoginに送る
+    //PHPSESSIDを受け取る
     console.log(values)
+    setCookie("PHPSSID", PHPSESSID)
+    console.log(PHPSESSID)
   }
 
   return (
     <Box sx={{ maxWidth: 300 }} mx="auto">
       <Link to={`/`}>ホームに戻る</Link>
     
-      <form onSubmit={form.onSubmit((values) => ID_setCookie(values, PHPSESSID))}>
+      <form onSubmit={form.onSubmit((values) => postUserdata(values))}>
         <TextInput
           withAsterisk
           label="username"
@@ -49,10 +51,8 @@ export const SignIn = () => {
         />
 
         <Group position="right" mt="md">
-          <Button type="submit"
-          >Submit</Button>
+          <Button type="submit">Submit</Button>
         </Group>
-
       </form>
     </Box>
   );
