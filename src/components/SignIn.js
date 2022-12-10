@@ -8,30 +8,6 @@ import { useMutateLogin } from '../api/useMutateLogin';
 import { useQueryLogin } from '../api/useQueryLogin';
 
 export const SignIn = () => {
-  // const { data, status } = useQueryLogin();
-  // console.log(data);
-  //const { useLogin } = useMutateLogin();
-  // useLogin.mutate(formData);
-  
-  const form = useForm({
-    initialValues: {
-      token: '',
-      username: '',
-      password:'',
-    },
-  });
-
-  const token = 'token';
-
-  const  [cookies , setCookie] = useCookies (['id']);
-
-  function Change(ID) {
-    setCookie ('ID', ID, {pass:'/'});
-  }
-
-  const takeToken = () => {
-    form.token = token;
-  }
 
   return (
     <Box sx={{ maxWidth: 300 }} mx="auto">
