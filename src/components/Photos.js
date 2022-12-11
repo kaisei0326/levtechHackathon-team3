@@ -1,7 +1,18 @@
 import React, { useState, useMemo } from 'react';
-import { Box, Paper, Text, createStyles } from '@mantine/core';
+import { 
+    createStyles,
+    Badge,
+    Group,
+    Title,
+    Text,
+    Card,
+    Container,
+    Box,
+  } from '@mantine/core';
 import { Masonry } from './Masonry';
 import './style.css';
+
+
 
 const AppStyles = createStyles((theme, {}) => ({
   root: {
@@ -27,6 +38,8 @@ const AppStyles = createStyles((theme, {}) => ({
 export function Photos() {
 
   return (
+      
+    
     <Box sx={{ width: 500, minHeight: 829 }}>
       <Masonry columns={3} spacing={2}>
         {itemData.map((item, index) => (

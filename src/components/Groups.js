@@ -10,9 +10,18 @@ import {
 } from '@mantine/core';
 
 const mockdata = [
- import { useCookies } from 'react-cookie';
- import { getData } from '../api/getData';
-
+  {
+    title: 'グループ1',
+    groupID: 'hoge'
+  },
+  {
+    title: 'グループ2',
+    groupID: 'huga'
+  },
+  {
+    title: 'グループ3',
+    groupID: 'foo'
+  },
 ];
 
 const useStyles = createStyles((theme) => ({
@@ -43,29 +52,11 @@ const useStyles = createStyles((theme) => ({
 }));
 
 export function Groups() {
-  const [cookie, setCookie, removeCookie] = useCookies()
-  const sessid = cookie.PHPSESSID
-
-  let gobj;
-  const getGroups = ()=>{
-    let request = new XMLHttpRequest();
-      request.open('GET', 'https://tadanodomain.gq:9090/v1/groups' + '?phpsessid=' + sessid, false);
-      request.send(null);
-
-      if (request.status == 200){
-        let data = request.responseText;
-        gobj = JSON.parse(data);
-        console.log(gobj);
-    }
-  }
-
-  getGroups();
-
   const { classes, theme } = useStyles();
-  const features = gobj.map((feature) => (
-    <Card key={feature.name} shadow="xs" radius="md" className={classes.card} p="xl" component="a" href={'./albams?gID='+feature.guniq}>
+  const features = mockdata.map((feature) => (
+    <Card key={feature.title} shadow="xs" radius="md" className={classes.card} p="xl" component="a" href={'./albams?gID='+feature.groupID}>
       <Text size="lg" weight={500} className={classes.cardTitle} mt="md" >
-        {feature.name}
+        {feature.title}
       </Text>
       
       <Text size="sm" color="dimmed" mt="sm" >
