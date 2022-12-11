@@ -1,4 +1,3 @@
-import { Grid, Skeleton, Container } from '@mantine/core';
 import {
     createStyles,
     Badge,
@@ -8,6 +7,7 @@ import {
     Card,
     SimpleGrid,
     Image,
+    Container,
   } from '@mantine/core';
 import { useCookies } from 'react-cookie';
 import { useSearchParams } from 'react-router-dom';
