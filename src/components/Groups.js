@@ -1,15 +1,15 @@
 import { 
   createStyles,
-    Badge,
-    Group,
-    Title,
-    Text,
-    Card,
-    Container,
-    Box,
- } from '@mantine/core';
+  Badge,
+  Group,
+  Title,
+  Text,
+  Card,
+  Container,
+  Box,
+} from '@mantine/core';
 
- const mockdata = [
+const mockdata = [
   {
     title: 'グループ1',
     groupID: 'hoge'
