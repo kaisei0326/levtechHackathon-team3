@@ -11,7 +11,7 @@ import {
 
 const mockdata = [
   {
-    title: 'グループ1',
+    title: '首里高 3年',
     groupID: 'hoge'
   },
   {

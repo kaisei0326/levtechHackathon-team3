@@ -47,7 +47,7 @@ export const SignIn = () => {
         />
 
         <Group position="right" mt="md">
-          <Button type="submit">Submit</Button>
+          <Button type="submit" component="a" href={'./groups'}>Submit</Button>
         </Group>
       </form>
     </Box>
