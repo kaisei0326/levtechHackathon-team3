@@ -9,8 +9,11 @@ import {
     SimpleGrid,
     Image,
   } from '@mantine/core';
+import { useCookies } from 'react-cookie';
 import { useSearchParams } from 'react-router-dom';
 import { getData } from '../api/getData';
+
+let gobj
 
   const mockdata = [
     {
@@ -81,21 +84,63 @@ import { getData } from '../api/getData';
 
 
 
-export async function Albams() {
+export function Albams() {
   const { classes, theme } = useStyles();
-  const guniq = '1';
+  const [cookie, setCookie, removeCookie] = useCookies()
+  const guniq = '1d688ac0f65f9bdfb55d8625bdc010b24186bb60fce6c56409d66208c033775b';
 
   // URLからguniqを取得する
   // const [searchParams, setSearchParams] = useSearchParams();
-  // const guniq = searchParams.get(guniq);
+  // const guniq = searchParams.get(gID);
+  
+  const sessid = cookie.PHPSESSID
+  const urlAlbams = 'https://tadanodomain.gq:9090/v1/albams?guniq=' + guniq + '&phpsessid=' + sessid;
 
-  const url = 'https://tadanodomain.gq:9090/v1/albams?guniq=' + guniq;
-  const { data } = await getData(url);
-  const albamList = data.map((albam) => {
-    <Card key={albam.title} shadow="xl" radius="md" className={classes.card} p="xl" component="a" href={'./photos?t='+albam.name}>
+
+  // アルバム一覧の取得
+  let request = new XMLHttpRequest();
+    request.open('GET', urlAlbams, false);
+    request.send(null);
+
+  // let aList;
+
+    if (request.status == 200){
+      let data = request.responseText;
+      // console.log(data);
+      gobj = JSON.parse(data);
+      // console.log(gobj);
+    }
+  // console.
+  let aList = gobj
+  console.log(aList)
+
+  // アルバムの画像一覧取得
+  const photos = aList.map((albam) => {
+    const url = 'https://tadanodomain.gq:9090/v1/albams?auniq=' + albam.auniq + '&phpsessid=' + sessid;
+
+    // let auniq = albam.auniq;
+    // let albamName = albam.name;
+
+    request.open('GET', url, false);
+    request.send(null);
+
+    if (request.status == 200){
+      let data = request.responseText;
+      // console.log(data);
+      gobj = JSON.parse(data);
+      // console.log(gobj);
+    }
+    return gobj;
+  })
+
+  console.log(photos)
+
+  const albamList = aList.map((albam) => {
+    return (
+    <Card key={aList.name} shadow="xl" radius="md" className={classes.card} p="xl" component="a" href={'./photos?t='+aList.name}>
       <Card.Section>
         <Image
-          src = {albam.photo}
+          src = "https://tadanodomain.gq:9090/imgs/dcfab9c84166cb704d7be7e310154664fe3c913e2e6d1c5ed106fd3e52839cfe.png"
           height={160}
           alt="Norway"
         />
@@ -103,38 +148,14 @@ export async function Albams() {
       <Text size="lg" weight={500} className={classes.cardTitle} mt="md">
         {albam.name}
       </Text>
-      {/* <Text size="sm" color="dimmed" mt="sm">
-        {albam.description}
-      </Text> */}
     </Card>
+    );
   })
 
-  console.log(data);
-  // dataをmockdataと入れ替える
+  console.log(albamList)
 
-  const newAlbam = () => {
 
-  }
-
-  const features = mockdata.map((feature) => (
-    <Card key={feature.title} shadow="xl" radius="md" className={classes.card} p="xl" component="a" href={'./photos?t='+feature.title}>
-      <Card.Section>
-        <Image
-          src = {feature.photo}
-          height={160}
-          alt="Norway"
-        />
-      </Card.Section>
-{/*           <feature.icon size={50} stroke={2} color={theme.fn.primaryColor()} /> */}
-      <Text size="lg" weight={500} className={classes.cardTitle} mt="md">
-        {feature.title}
-      </Text>
-      <Text size="sm" color="dimmed" mt="sm">
-        {feature.description}
-      </Text>
-            
-    </Card>
-  ));
+ 
 
   return (
     <Container size="lg" py="xl">
@@ -148,13 +169,8 @@ export async function Albams() {
         首里高 3年
       </Title>
 
-{/*          <Text color="dimmed" className={classes.description} align="center" mt="md">
-        Every once in a while, you’ll see a Golbat that’s missing some fangs. This happens when
-        hunger drives it to try biting a Steel-type Pokémon.
-      </Text>
-*/}   
       <SimpleGrid cols={3} spacing="xl" mt={50} breakpoints={[{ maxWidth: 'md', cols: 1 }]}>
-        {features}
+        {albamList}
       </SimpleGrid>
     </Container>
   );
