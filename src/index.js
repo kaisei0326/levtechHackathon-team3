@@ -7,6 +7,7 @@ import { MantineProvider } from '@mantine/core';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { SignIn } from './components/SignIn';
 import { SignUp } from './components/SignUp';
+import { Groups } from './components/Groups';
 import { Albams } from './components/Albams';
 import { Home } from './components/Home';
 import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
@@ -24,6 +25,7 @@ root.render(
             <Route path={`/`} element={<Home />} />
             <Route path={`/signin`} element={<SignIn />} />
             <Route path={`/signup`} element={<SignUp />} />
+            <Route path={`/groups`} element={<Groups />} />
             <Route path={`/albams`} element={<Albams />} />
           </Routes>
         </BrowserRouter>
