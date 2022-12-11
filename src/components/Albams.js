@@ -80,7 +80,7 @@ import {
 export function Albams() {
         const { classes, theme } = useStyles();
         const features = mockdata.map((feature) => (
-          <Card key={feature.title} shadow="xl" radius="md" className={classes.card} p="xl" component="a" href={'./photo?t='+feature.title}>
+          <Card key={feature.title} shadow="xl" radius="md" className={classes.card} p="xl" component="a" href={'./photos?t='+feature.title}>
             <Card.Section>
 							<Image
                 src = {feature.photo}
