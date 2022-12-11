@@ -9,6 +9,7 @@ import { SignIn } from './components/SignIn';
 import { SignUp } from './components/SignUp';
 import { Albams } from './components/Albams';
 import { Home } from './components/Home';
+import { Photo } from './components/Photo';
 import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
 import { CookiesProvider } from "react-cookie";
 
@@ -25,6 +26,7 @@ root.render(
             <Route path={`/signin`} element={<SignIn />} />
             <Route path={`/signup`} element={<SignUp />} />
             <Route path={`/albams`} element={<Albams />} />
+            <Route path={`/photo`} element={<Photo />} />
           </Routes>
         </BrowserRouter>
       </QueryClientProvider>
