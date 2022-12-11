@@ -101,7 +101,7 @@ export function Albams() {
         return (
           <Container size="lg" py="xl">
             <Group position="right">
-              <Badge variant="filled" size="lg">
+              <Badge variant="filled" size="lg"  component='a' href='./signout'>
                 サインアウト
               </Badge>
             </Group>
