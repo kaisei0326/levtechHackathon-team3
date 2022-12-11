@@ -31,8 +31,10 @@ export const SignIn = () => {
   return (
     <Box sx={{ maxWidth: 300 }} mx="auto">
       <Link to={`/`}>ホームに戻る</Link>
-    
-      <form onSubmit={form.onSubmit((values) => postUserdata(values))}>
+
+      <form onSubmit={form.onSubmit((values) => {
+        postUserdata(values)
+      })}>
         <TextInput
           withAsterisk
           label="name"
