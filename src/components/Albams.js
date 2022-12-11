@@ -1,6 +1,4 @@
 import { Grid, Skeleton, Container } from '@mantine/core';
-import { AiFillFolder } from "react-icons/ai"
-import '../Albams.css';
 import {
     createStyles,
     Badge,
@@ -9,12 +7,8 @@ import {
     Text,
     Card,
     SimpleGrid,
-    BackgroundImage,
-    Center,
-    Box,
     Image,
   } from '@mantine/core';
-  import { IconGauge, IconUser, IconCookie } from '@tabler/icons';
 
   const mockdata = [
     {
@@ -33,8 +27,6 @@ import {
       photo: 'https://www.fujiya-peko.co.jp/cake/images/img_delux_short_181015.jpg'
     },
   ];
-
-  const folderImages = '../photo/gassyuku.jpg'
   
   const useStyles = createStyles((theme) => ({
 		photo: {
@@ -88,12 +80,14 @@ import {
 export function Albams() {
         const { classes, theme } = useStyles();
         const features = mockdata.map((feature) => (
-          <Card key={feature.title} shadow="md" radius="md" className={classes.card} p="xl" >
-            <Image
+          <Card key={feature.title} shadow="xl" radius="md" className={classes.card} p="xl" component="a" href={'./photo?t='+feature.title}>
+            <Card.Section>
+							<Image
                 src = {feature.photo}
                 height={160}
                 alt="Norway"
-            />
+            	/>
+						</Card.Section>
 {/*           <feature.icon size={50} stroke={2} color={theme.fn.primaryColor()} /> */}
             <Text size="lg" weight={500} className={classes.cardTitle} mt="md">
               {feature.title}
@@ -113,7 +107,7 @@ export function Albams() {
             </Group>
       
             <Title order={2} className={classes.title} align="center" mt="sm">
-              グループ1
+              首里高 3年
             </Title>
       
 {/*          <Text color="dimmed" className={classes.description} align="center" mt="md">
