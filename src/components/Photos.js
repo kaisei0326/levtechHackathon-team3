@@ -1,33 +1,114 @@
-import React, { useState, useMemo } from 'react';
-import { Box, Paper, Text, createStyles } from '@mantine/core';
+
+import { 
+    createStyles,
+    Badge,
+    Group,
+    Title,
+    Text,
+    Card,
+    Container,
+    Box,
+  } from '@mantine/core';
 import { Masonry } from './Masonry';
 import './style.css';
+  
+   import { useCookies } from 'react-cookie';
+   import { getData } from '../api/getData';
+  
+  
+  const useStyles = createStyles((theme) => ({
+    title: {
+      fontSize: 34,
+      fontWeight: 900,
+      [theme.fn.smallerThan('sm')]: {
+        fontSize: 24,
+      },
+    },
+  
+    card: {
+      border: `1px solid ${
+        theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[1]
+      }`,
+    },
+  
+    cardTitle: {
+      '&::after': {
+        content: '""',
+        display: 'block',
+        backgroundColor: theme.fn.primaryColor(),
+        width: 45,
+        height: 2,
+        marginTop: theme.spacing.sm,
+      },
+    },
+  }));
 
-const AppStyles = createStyles((theme, {}) => ({
-  root: {
-    textAlign: 'center',
-    background: theme.colors.gray[4],
-    boxSizing: 'border-box',
-    padding: 20,
-  },
-  item: {
-    minWidth: 100,
-    height: 120,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    transition: 'all .3s ease-out',
-  },
-  container: {
-    width: '100%',
-    position: 'relative',
-  },
-}));
-
-export function Photos() {
-
-  return (
-    <Box sx={{ width: 500, minHeight: 829 }}>
+  const AppStyles = createStyles((theme, {}) => ({
+    root: {
+      textAlign: 'center',
+      background: theme.colors.gray[4],
+      boxSizing: 'border-box',
+      padding: 20,
+    },
+    item: {
+      minWidth: 100,
+      height: 120,
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      transition: 'all .3s ease-out',
+    },
+    container: {
+      width: '100%',
+      position: 'relative',
+    },
+  }));
+  
+  export function Photos() {
+    const [cookie, setCookie, removeCookie] = useCookies()
+    const sessid = cookie.PHPSESSID
+  
+    let gobj;
+    const getGroups = ()=>{
+      let request = new XMLHttpRequest();
+        request.open('GET', 'https://tadanodomain.gq:9090/v1/groups' + '?phpsessid=' + sessid, false);
+        request.send(null);
+  
+        if (request.status == 200){
+          let data = request.responseText;
+          gobj = JSON.parse(data);
+          console.log(gobj);
+      }
+    }
+  
+    getGroups();
+  
+    const { classes, theme } = useStyles();
+    const features = gobj.map((feature) => (
+      <Card key={feature.name} shadow="xs" radius="md" className={classes.card} p="xl" component="a" href={'./albams?gID='+feature.guniq}>
+        <Text size="lg" weight={500} className={classes.cardTitle} mt="md" >
+          {feature.name}
+        </Text>
+        
+        <Text size="sm" color="dimmed" mt="sm" >
+          {feature.description}
+        </Text>
+      </Card>
+    ));
+    
+    return (
+      <Container size="lg" py="xl">
+        <Group position="right">
+          <Badge variant="filled" size="lg"  component='a' href='./signout'>
+            サインアウト
+          </Badge>
+        </Group>
+        
+        <Title order={2} className={classes.title} align="center" mt="sm">
+          グループ
+        </Title>
+        
+        <Box sx={{ width: 500, minHeight: 829 }}>
       <Masonry columns={3} spacing={2}>
         {itemData.map((item, index) => (
           <div key={index}>
@@ -47,10 +128,11 @@ export function Photos() {
         ))}
       </Masonry>
     </Box>
-  );
-}
+      </Container>
+    );
+  }
 
-const itemData = [
+  const itemData = [
     {
       img: 'https://images.unsplash.com/photo-1518756131217-31eb79b20e8f',
       title: 'Fern',

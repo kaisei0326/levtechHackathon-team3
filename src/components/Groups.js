@@ -1,18 +1,30 @@
 import { 
   createStyles,
-  Badge,
-  Group,
-  Title,
-  Text,
-  Card,
-  Container,
-  Box,
-} from '@mantine/core';
+    Badge,
+    Group,
+    Title,
+    Text,
+    Card,
+    Container,
+    Box,
+ } from '@mantine/core';
 
-const mockdata = [
  import { useCookies } from 'react-cookie';
  import { getData } from '../api/getData';
 
+ const mockdata = [
+  {
+    title: 'グループ1',
+    groupID: 'hoge'
+  },
+  {
+    title: 'グループ2',
+    groupID: 'huga'
+  },
+  {
+    title: 'グループ3',
+    groupID: 'foo'
+  },
 ];
 
 const useStyles = createStyles((theme) => ({
