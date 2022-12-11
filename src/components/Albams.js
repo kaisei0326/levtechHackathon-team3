@@ -132,10 +132,9 @@ export async function Albams() {
       <Text size="sm" color="dimmed" mt="sm">
         {feature.description}
       </Text>
-      
+            
     </Card>
   ));
-
 
   return (
     <Container size="lg" py="xl">
