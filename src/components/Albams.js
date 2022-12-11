@@ -1,6 +1,4 @@
 import { Grid, Skeleton, Container } from '@mantine/core';
-import { AiFillFolder } from "react-icons/ai"
-import '../Albams.css';
 import {
     createStyles,
     Badge,
@@ -9,34 +7,34 @@ import {
     Text,
     Card,
     SimpleGrid,
-    BackgroundImage,
-    Center,
-    Box,
+    Image,
   } from '@mantine/core';
-  import { IconGauge, IconUser, IconCookie } from '@tabler/icons';
 
   const mockdata = [
     {
       title: '夏合宿',
       description: "32枚の写真",
-      icon: IconGauge,
-      photo: "https://i2.wp.com/star-be.com/wp-content/uploads/2019/08/DSC_2269.jpg?fit=665%2C443&ssl=1",
+      photo: 'https://i2.wp.com/star-be.com/wp-content/uploads/2019/08/DSC_2269.jpg?fit=665%2C443&ssl=1',
     },
     {
       title: '夏休み',
-      description:
-        '60枚の写真',
-      icon: IconUser,
+      description:'60枚の写真',
+      photo: 'https://www.his-j.com/season/summer/__renew/images/mv_sp.jpg'
     },
     {
       title: '昨年度のハイライト',
-      description:
-        '30枚の写真',
-      icon: IconCookie,
+      description:'30枚の写真',
+      photo: 'https://www.fujiya-peko.co.jp/cake/images/img_delux_short_181015.jpg'
     },
   ];
   
   const useStyles = createStyles((theme) => ({
+		photo: {
+			marginTop: 0,
+			marginLeft: 0,
+			marginRight: 0,
+		},
+
     title: {
       fontSize: 34,
       fontWeight: 900,
@@ -77,19 +75,27 @@ import {
         marginTop: theme.spacing.sm,
       },
     },
-  }));
+	}));
 
 export function Albams() {
         const { classes, theme } = useStyles();
         const features = mockdata.map((feature) => (
-          <Card key={feature.title} shadow="md" radius="md" className={classes.card} p="xl">
-            <feature.icon size={50} stroke={2} color={theme.fn.primaryColor()} />
+          <Card key={feature.title} shadow="xl" radius="md" className={classes.card} p="xl" component="a" href={'./photos?t='+feature.title}>
+            <Card.Section>
+							<Image
+                src = {feature.photo}
+                height={160}
+                alt="Norway"
+            	/>
+						</Card.Section>
+{/*           <feature.icon size={50} stroke={2} color={theme.fn.primaryColor()} /> */}
             <Text size="lg" weight={500} className={classes.cardTitle} mt="md">
               {feature.title}
             </Text>
             <Text size="sm" color="dimmed" mt="sm">
               {feature.description}
             </Text>
+            
           </Card>
         ));
         return (
@@ -101,7 +107,7 @@ export function Albams() {
             </Group>
       
             <Title order={2} className={classes.title} align="center" mt="sm">
-              グループ1
+              首里高 3年
             </Title>
       
 {/*          <Text color="dimmed" className={classes.description} align="center" mt="md">
