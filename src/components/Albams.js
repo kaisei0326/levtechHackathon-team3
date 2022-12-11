@@ -1,4 +1,3 @@
-import { Grid, Skeleton, Container } from '@mantine/core';
 import {
     createStyles,
     Badge,
@@ -8,6 +7,7 @@ import {
     Card,
     SimpleGrid,
     Image,
+    Container,
   } from '@mantine/core';
 
   const mockdata = [
@@ -109,12 +109,7 @@ export function Albams() {
             <Title order={2} className={classes.title} align="center" mt="sm">
               首里高 3年
             </Title>
-      
-{/*          <Text color="dimmed" className={classes.description} align="center" mt="md">
-              Every once in a while, you’ll see a Golbat that’s missing some fangs. This happens when
-              hunger drives it to try biting a Steel-type Pokémon.
-            </Text>
-*/}   
+
             <SimpleGrid cols={3} spacing="xl" mt={50} breakpoints={[{ maxWidth: 'md', cols: 1 }]}>
               {features}
             </SimpleGrid>
